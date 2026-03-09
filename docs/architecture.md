@@ -6,7 +6,7 @@ Schema logico di tutti i servizi e come interagiscono tra loro.
 
 ## Overview
 
-Il homelab gira su un server fisico Ubuntu con tre livelli principali:
+Il mio homelab gira su un server fisico Ubuntu con tre livelli principali:
 Docker Engine per i servizi containerizzati, servizi nativi systemd per
 le funzionalità di sistema, e due dischi secondari dedicati allo storage.
 
@@ -25,7 +25,7 @@ Servizi che costituiscono il backbone operativo del server.
 | Diun | Notifiche automatiche per aggiornamenti immagini Docker |
 
 ### 📊 Monitoring
-Stack completo di observability per hardware e container.
+Stack completo di osservabilità per hardware e container.
 
 | Servizio | Ruolo |
 |---|---|
@@ -89,7 +89,9 @@ Portainer, Homepage, Diun e Uptime Kuma necessitano di comunicare
 con il Docker daemon per leggere lo stato dei container.
 
 Esporre direttamente /var/run/docker.sock equivale a dare accesso root
-al sistema operativo a chiunque riesca a compromettere il container.
+al sistema operativo a chiunque riesca a compromettere il container, e io sono scarso.
+
+Quindi......
 
 La soluzione adottata prevede un'istanza dedicata di
 tecnativa/docker-socket-proxy per ogni servizio, con permessi minimi
@@ -105,6 +107,6 @@ e in sola lettura — principio di least privilege applicato a Docker.
 ## Gestione Aggiornamenti
 
 Diun (Docker Image Update Notifier) monitora continuamente tutte le
-immagini Docker in uso e invia una notifica non appena viene rilasciata
+immagini Docker in uso e invia una notifica Telegram non appena viene rilasciata
 una nuova versione upstream. Gli aggiornamenti vengono quindi applicati
 manualmente e consapevolmente — nessun auto-update inaspettato.

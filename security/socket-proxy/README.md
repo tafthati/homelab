@@ -20,7 +20,7 @@ volumes:
 
 Questo è **estremamente pericoloso**: chiunque riesca a compromettere
 un container con accesso al socket ha di fatto **accesso root
-all'intero sistema operativo host** — può creare container privilegiati,
+all'intero sistema operativo host** e può creare container privilegiati,
 montare il filesystem dell'host, eseguire comandi arbitrari.
 
 ---
@@ -29,7 +29,7 @@ montare il filesystem dell'host, eseguire comandi arbitrari.
 
 `tecnativa/docker-socket-proxy` è un proxy che si interpone tra
 il container e il Docker daemon, esponendo solo le API Docker
-strettamente necessarie — e bloccando tutto il resto.
+strettamente necessarie e bloccando tutto il resto.
 
 ```
 SENZA proxy (pericoloso)
@@ -45,7 +45,7 @@ CON proxy (sicuro)
 ## Implementazione nel Homelab
 
 Ogni servizio che richiede accesso al Docker daemon ha la propria
-istanza dedicata del proxy — principio di isolamento applicato
+istanza dedicata del proxy; principio di isolamento applicato
 anche alla sicurezza.
 
 | Servizio | Istanza Proxy | Permessi |

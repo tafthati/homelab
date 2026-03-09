@@ -1,8 +1,8 @@
 # 📡 iperf3
 
 iperf3 è uno strumento per la misurazione delle performance di rete
-tra due dispositivi — misura la banda reale disponibile, la latenza
-e la qualità del collegamento in modo preciso e affidabile.
+tra due dispositivi; misura la banda reale disponibile, la latenza
+e la qualità del collegamento in modo preciso e affidabile; in più fa figo.
 
 ---
 

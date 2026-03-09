@@ -1,5 +1,5 @@
 # ============================================================
-#  🔐 SECRETS & ENVIRONMENT — mai pubblicare questi
+#  🔐 SECRETS & ENVIRONMENT (muy importante)
 # ============================================================
 .env
 *.env
@@ -8,7 +8,7 @@
 !.env.example
 
 # ============================================================
-#  🗄️ DATABASE — dati runtime dei container
+#  🗄️  DATABASE (le basi, o le data-basi se preferisci)
 # ============================================================
 postgres/
 postgresql/
@@ -23,7 +23,7 @@ mongodb/
 *.db
 
 # ============================================================
-#  📁 DATI RUNTIME DOCKER — volumi montati localmente
+#  📁 DATI RUNTIME DOCKER (Sempre giusto metterle)
 # ============================================================
 data/
 volumes/
@@ -40,7 +40,7 @@ cache/
 config/
 
 # ============================================================
-#  📸 MEDIA & FILE PESANTI
+#  📸 MEDIA & FILE PESANTI (file-shaming)
 # ============================================================
 *.jpg
 *.jpeg
@@ -54,14 +54,14 @@ config/
 *.raw
 
 # ============================================================
-#  📋 LOG
+#  📋 LOG (è giusto così alla fine)
 # ============================================================
 *.log
 logs/
 log/
 
 # ============================================================
-#  🔑 CERTIFICATI & CHIAVI
+#  🔑 CERTIFICATI & CHIAVI (per accontentare la mia para)
 # ============================================================
 *.pem
 *.key
@@ -74,7 +74,7 @@ id_ed25519
 *.pub
 
 # ============================================================
-#  💻 OS & EDITOR
+#  💻 OS & EDITOR (perchè fa sempre aura)
 # ============================================================
 .DS_Store
 Thumbs.db
@@ -86,7 +86,7 @@ Thumbs.db
 desktop.ini
 
 # ============================================================
-#  📦 NODE / BUILD ARTIFACTS (per sicurezza)
+#  📦 NODE / BUILD ARTIFACTS (non si sa mai!)
 # ============================================================
 node_modules/
 pnpm-lock.yaml
@@ -96,7 +96,7 @@ dist/
 build/
 
 # ============================================================
-#  🛠️ BACKUP & TEMP
+#  🛠️ BACKUP & TEMP (direi anche basta ora)
 # ============================================================
 *.bak
 *.tmp

@@ -1,7 +1,7 @@
 # 🎬 Jellyfin
 
 Jellyfin è un media server self-hosted per lo streaming di film,
-serie TV, musica e foto in rete locale — un'alternativa open source
+serie TV, musica e foto in rete locale, un'alternativa open source
 e completamente gratuita a Plex e Emby.
 
 ---
@@ -31,7 +31,7 @@ ai dischi di storage.
 
 | Mount Point | Contenuto |
 |---|---|
-| `/mnt/media_jelly` | Libreria multimediale principale (~500 GB) |
+| `/cartella/nome_mount` | Libreria multimediale principale (~500 GB) |
 
 ---
 
@@ -64,6 +64,5 @@ sudo journalctl -u jellyfin -f
 ## Note
 
 - Installato come pacchetto nativo per performance di transcodifica ottimali
-- Il disco `/mnt/media_jelly` è dedicato esclusivamente alla libreria Jellyfin
 - In combinazione con Samba, i file possono essere aggiunti alla libreria
   anche tramite file sharing dalla rete locale

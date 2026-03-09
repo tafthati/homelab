@@ -2,14 +2,14 @@
 
 Smartmontools monitora la salute dei dischi fisici tramite la
 tecnologia S.M.A.R.T. (Self-Monitoring, Analysis and Reporting
-Technology) — legge i sensori interni dei dischi e avvisa
+Technology), legge i sensori interni dei dischi e avvisa
 in anticipo di possibili guasti imminenti.
 
 ---
 
 ## Perché Smartmontools
 
-I dischi fisici si guastano — è questione di quando, non di se.
+I dischi fisici si guastano è questione di quando, non di se.
 Smartmontools legge continuamente i parametri S.M.A.R.T. dei
 dischi (temperatura, settori danneggiati, ore di utilizzo,
 errori di lettura) e permette di intervenire prima che un
@@ -86,6 +86,6 @@ sudo journalctl -u smartmontools -f
 ## Note
 
 - Un valore `PASSED` al controllo di salute non garantisce che il disco
-  non si guasti — monitorare nel tempo i trend dei parametri critici
+  non si guasti; monitorare nel tempo i trend dei parametri critici
 - In caso di `Reallocated_Sector_Ct` > 0 pianificare subito la sostituzione
 - Fare sempre backup prima di qualsiasi operazione su dischi con anomalie

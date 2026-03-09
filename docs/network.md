@@ -6,16 +6,30 @@ Architettura di rete del homelab: indirizzi, servizi esposti e isolamento.
 
 ## Topologia
 
-Internet
-│
-Router
-│
-LAN (192.168.1.0/24)
-│
-ubuserver ←── IP statico assegnato dal router
-│
-├── Docker networks (bridge isolate per progetto)
-└── VPN (WireGuard) ←── accesso remoto sicuro
+```
+                        Internet
+                            │
+                       Oracle VPS
+                      (WireGuard server
+                       / exit node)
+                            │
+                    WireGuard Tunnel
+                            │
+                       ubuserver
+                     (WireGuard client)
+                            │
+                    Router LAN (192.XXX.X.X/24)
+                            │
+              ┌─────────────┴─────────────┐
+              │                           │
+     Docker networks                 Dispositivi LAN
+  (bridge isolate per progetto)    (PC, smartphone, ecc.)
+```
+
+Il traffico in uscita verso internet transita attraverso il tunnel
+WireGuard verso il VPS Oracle, che funge da exit node.
+L'accesso remoto all'homelab avviene anch'esso tramite lo stesso
+tunnel — senza aprire porte sul router di casa.
 
 ---
 
@@ -23,7 +37,7 @@ ubuserver ←── IP statico assegnato dal router
 
 | Interfaccia | Descrizione |
 |---|---|
-| LAN | IP statico in rete locale (assegnato via DHCP reservation) |
+| LAN | IP statico in rete locale (assegnato via DHCP reservation, infinite Lease) |
 | VPN | Interfaccia WireGuard per accesso remoto |
 | Docker bridge | Sottoreti interne isolate per ogni progetto Compose |
 
@@ -34,7 +48,7 @@ ubuserver ←── IP statico assegnato dal router
 ## Servizi e Porte
 
 Ogni servizio è raggiungibile **solo dalla rete locale** (o via VPN).
-Nessun servizio è esposto direttamente su internet.
+Nessun servizio è esposto direttamente su internet. (per ora)
 
 ### 🐳 Servizi Docker
 

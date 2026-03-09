@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🏠 Homelab
+# 🏠 Casalab
 
 **Documentazione completa del mio home server self-hosted**
 
@@ -15,9 +15,9 @@
 
 ## 📖 Cos'è questo progetto?
 
-Questo repository documenta l'evoluzione del mio home server: configurazioni,
-servizi self-hosted, scelte architetturali e lezioni imparate.
-Tutto gira su un server Ubuntu fisico in rete locale.
+Questo repository documenta l'evoluzione del mio home server nel tempo: configurazioni,
+servizi self-hosted, scelte architetturali, lezioni imparate e cose rotte.
+Tutto gira su un server Ubuntu fisico in rete locale, collegato in Wi-Fi (brrr)
 
 > 💡 **Filosofia**: ogni servizio è containerizzato con Docker Compose,
 > isolato in reti dedicate, e protetto dove possibile tramite
@@ -27,16 +27,15 @@ Tutto gira su un server Ubuntu fisico in rete locale.
 
 ## 🗂️ Struttura del Repository
 
-homelab/
-├── 📁 docs/ → Architettura, hardware e rete
-├── 📁 docker/ → Tutti i servizi Docker Compose
-│ ├── infrastructure/ → Backbone del server
-│ ├── monitoring/ → Observability stack
-│ ├── media/ → Gestione file e foto
-│ └── productivity/ → Strumenti di produttività
-├── 📁 services/ → Servizi installati nativamente
-└── 📁 security/ → Pattern e configurazioni di sicurezza
-
+| Cartella | Contenuto |
+|---|---|
+| 📁 [`docs/`](./docs/) | Architettura, hardware e rete |
+| 📁 [`docker/infrastructure/`](./docker/infrastructure/) | Backbone del server |
+| 📁 [`docker/monitoring/`](./docker/monitoring/) | Observability stack completo |
+| 📁 [`docker/media/`](./docker/media/) | Gestione file e contenuti multimediali |
+| 📁 [`docker/productivity/`](./docker/productivity/) | Strumenti di produttività personale |
+| 📁 [`services/`](./services/) | Servizi installati nativamente su systemd |
+| 📁 [`security/`](./security/) | Pattern e configurazioni di sicurezza |
 
 ---
 
@@ -75,7 +74,7 @@ homelab/
 
 Tutti i container che necessitano di accesso al Docker daemon usano
 [`tecnativa/docker-socket-proxy`](./security/socket-proxy/README.md)
-invece di montare `/var/run/docker.sock` direttamente — limitando i permessi
+invece di montare `/var/run/docker.sock` direttamente, limitando i permessi
 al minimo necessario.
 
 ---
@@ -90,6 +89,6 @@ al minimo necessario.
 
 <div align="center">
 
-*Self-hosted with ❤️   built to learn, documented to share*
+*Self-hosted with ❤️  and 🚬.  Built to learn, documented to share*
 
 </div>

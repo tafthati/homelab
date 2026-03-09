@@ -1,7 +1,7 @@
 # 🖥️ Webmin
 
 Webmin è un pannello di amministrazione web per la gestione
-del sistema operativo Linux — permette di configurare utenti,
+del sistema operativo Linux e permette di configurare utenti,
 servizi, firewall, aggiornamenti e molto altro tramite
 interfaccia grafica senza usare il terminale.
 
@@ -12,7 +12,7 @@ interfaccia grafica senza usare il terminale.
 Alcune operazioni di amministrazione di sistema sono più rapide
 e meno soggette a errori tramite interfaccia grafica. Webmin
 offre un pannello centralizzato per gestire gli aspetti del
-sistema operativo che non sono coperti da Portainer — utenti
+sistema operativo che non sono coperti da Portainer: utenti
 di sistema, cron job, configurazioni di rete, log di sistema
 e stato dei servizi systemd.
 
@@ -59,7 +59,7 @@ sudo journalctl -u webmin -f
 
 ## Note
 
-- Webmin usa HTTPS con certificato autofirmato — il browser mostrerà
+- Webmin usa HTTPS con certificato autofirmato, il browser mostrerà
   un avviso alla prima apertura, è normale
 - Accessibile esclusivamente dalla rete locale
 - Complementare a Portainer: Webmin gestisce il sistema operativo,

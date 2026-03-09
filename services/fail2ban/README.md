@@ -1,7 +1,7 @@
 # 🛡️ Fail2ban
 
 Fail2ban monitora i log di sistema e blocca automaticamente gli
-indirizzi IP che mostrano comportamenti sospetti — tentativi
+indirizzi IP che mostrano comportamenti sospetti, tentativi
 di brute-force SSH, accessi falliti ripetuti e scansioni di porte.
 
 ---
@@ -9,7 +9,7 @@ di brute-force SSH, accessi falliti ripetuti e scansioni di porte.
 ## Perché Fail2ban
 
 Un server con SSH esposto riceve tentativi di accesso automatizzati
-costantemente — bot che provano combinazioni di credenziali 24 ore
+costantemente; bot che provano combinazioni di credenziali 24 ore
 su 24. Fail2ban rileva questi pattern nei log e blocca l'IP
 sorgente tramite regole firewall automatiche, riducendo
 drasticamente la superficie di attacco.
@@ -74,5 +74,5 @@ sudo journalctl -u fail2ban -f
 - Fail2ban è la prima linea di difesa attiva del server
 - Opera in sinergia con l'autenticazione SSH a chiave pubblica —
   insieme rendono praticamente impossibile un accesso non autorizzato
-- I ban sono temporanei per default — configurabili in permanenti
+- I ban sono temporanei per default e configurabili in permanenti
   per IP particolarmente aggressivi
