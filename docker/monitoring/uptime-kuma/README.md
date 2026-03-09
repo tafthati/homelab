@@ -58,15 +58,6 @@ Per i dettagli → [Docker Socket Proxy](../../../security/socket-proxy/README.m
 | `docker-compose.yml` | Definizione del servizio e del socket proxy dedicato |
 | `.env.example` | Variabili d'ambiente necessarie (copiare in `.env`) |
 
----
-
-## Deploy
-
-```bash
-cp .env.example .env
-nano .env
-docker compose up -d
-```
 
 ---
 

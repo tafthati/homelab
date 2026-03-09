@@ -78,7 +78,6 @@ docker compose up -d
 
 ## Note
 
-- Le credenziali di default sono `admin@admin.com` / `password` — cambiarle subito
 - Il database MariaDB va avviato e pronto prima che BookStack si connetta
 - Fare backup regolari del volume del database — contiene tutta la documentazione
 - I dati sono persistiti in volumi Docker dedicati per app e database

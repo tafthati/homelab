@@ -1,0 +1,64 @@
+networks:
+  # Rete interna isolata — il DB non è raggiungibile dall'esterno
+  bookstack_net:
+    internal: true
+  # Rete esterna per permettere a BookStack di rispondere alle richieste web
+  proxy:
+    external: false
+
+services:
+
+  bookstack:
+    image: lscr.io/linuxserver/bookstack:latest
+    container_name: bookstack
+    restart: unless-stopped
+    labels:
+      - "diun.enable=true"
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - APP_URL=${APP_URL}
+      - APP_KEY=${APP_KEY}
+      - DB_HOST=bookstack_db
+      - DB_USERNAME=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_DATABASE=${DB_NAME}
+    volumes:
+      - ./config:/config
+    ports:
+      - ${BOOKSTACK_PORT:-6875}:80
+    networks:
+      - bookstack_net
+      - proxy
+    depends_on:
+      bookstack_db:
+        # Aspetta che il DB sia effettivamente pronto prima di avviare
+        condition: service_healthy
+
+  bookstack_db:
+    image: lscr.io/linuxserver/mariadb:latest
+    container_name: bookstack_db
+    restart: unless-stopped
+    labels:
+      - "diun.enable=true"
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - ./db_data:/config
+    networks:
+      # ⚠️  Solo rete interna — il DB non è mai esposto all'esterno
+      - bookstack_net
+    healthcheck:
+      # Verifica che MariaDB sia pronto ad accettare connessioni
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s

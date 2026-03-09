@@ -1,0 +1,39 @@
+{
+  "port": 80,
+  "baseURL": "",
+  "address": "",
+  "log": "stdout",
+  "database": "/database/filebrowser.db",
+  "root": "/srv",
+
+  "auth": {
+    "method": "json",
+    "header": ""
+  },
+
+  "defaults": {
+    "scope": ".",
+    "locale": "it",
+    "viewMode": "list",
+    "singleClick": false,
+    "sorting": {
+      "by": "name",
+      "asc": true
+    },
+    "perm": {
+      "admin": false,
+      "execute": false,
+      "create": true,
+      "rename": true,
+      "modify": true,
+      "delete": false,
+      "share": false,
+      "download": true
+    }
+  },
+
+  "branding": {
+    "name": "My CLoud",
+    "disableExternal": true
+  }
+}

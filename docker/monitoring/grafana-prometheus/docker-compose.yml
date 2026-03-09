@@ -1,0 +1,112 @@
+networks:
+  monitoring:
+    driver: bridge
+    # Rete isolata — i servizi di monitoring comunicano solo tra loro
+    internal: false
+
+volumes:
+  prometheus-data:
+  grafana-data:
+
+services:
+
+  # --------------------------------------------
+  #   PROMETHEUS — Raccolta e storage metriche
+  # --------------------------------------------
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    restart: unless-stopped
+    labels:
+      - "diun.enable=true"
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--storage.tsdb.retention.time=30d'
+      - '--storage.tsdb.retention.size=10GB'
+      # Disabilita la console web di amministrazione (non necessaria)
+      - '--web.enable-admin-api=false'
+    volumes:
+      # :ro = sola lettura, Prometheus non deve modificare la sua config
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    ports:
+      - "192.XXX.X.XX:9090:9090"
+      - "10.X.X.X:9090:9090"
+    networks:
+      - monitoring
+
+  # --------------------------------------------
+  #   NODE EXPORTER — Metriche sistema host
+  # --------------------------------------------
+  node-exporter:
+    image: quay.io/prometheus/node-exporter:latest
+    container_name: node-exporter
+    restart: unless-stopped
+    labels:
+      - "diun.enable=true"
+    pid: host
+    # ⚠️  pid: host è necessario per raccogliere metriche di processo del sistema
+    command:
+      - '--path.rootfs=/host'
+      - '--collector.processes'
+      - '--collector.interrupts'
+      - '--collector.systemd'
+    volumes:
+      # :ro,rslave = sola lettura, montaggio ricorsivo slave (sicuro)
+      - /:/host:ro,rslave
+    ports:
+      - "192.XXX.X.XX:9100:9100"
+      - "10.X.X.X:9100:9100"
+    networks:
+      - monitoring
+
+  # --------------------------------------------
+  #   CADVISOR — Metriche container Docker
+  # --------------------------------------------
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    container_name: cadvisor
+    restart: unless-stopped
+    labels:
+      - "diun.enable=true"
+    # ⚠️  privileged: true necessario per accedere alle metriche kernel/cgroup
+    privileged: true
+    devices:
+      - /dev/kmsg:/dev/kmsg
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+    ports:
+      - "192.XXX.X.XX:8081:8080"
+      - "10.X.X.X:8081:8080"
+    networks:
+      - monitoring
+
+  # --------------------------------------------
+  #   GRAFANA — Visualizzazione metriche
+  # --------------------------------------------
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    restart: unless-stopped
+    labels:
+      - "diun.enable=true"
+    env_file:
+      - .env
+    environment:
+      # Permette l'embedding di panel in iframe (es. dashboard esterne)
+      # ⚠️  Impostare a false se non usi embed attivamente
+      - GF_SECURITY_ALLOW_EMBEDDING=true
+    volumes:
+      - grafana-data:/var/lib/grafana
+    ports:
+      - "192.XXX.X.XX:3000:3000"
+      - "10.X.X.X:3000:3000"
+    networks:
+      - monitoring
+    depends_on:
+      - prometheus

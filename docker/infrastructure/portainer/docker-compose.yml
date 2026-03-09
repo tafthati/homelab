@@ -1,0 +1,44 @@
+services:
+  socket-proxy-portainer:
+    image: tecnativa/docker-socket-proxy:latest
+    container_name: socket-proxy-portainer
+    labels:
+      - "diun.enable=true"
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      CONTAINERS: ${SOCKET_PROXY_CONTAINERS}
+      SERVICES: ${SOCKET_PROXY_SERVICES}
+      TASKS: ${SOCKET_PROXY_TASKS}
+      IMAGES: ${SOCKET_PROXY_IMAGES}
+      VOLUMES: ${SOCKET_PROXY_VOLUMES}
+      NETWORKS: ${SOCKET_PROXY_NETWORKS}
+      EXEC: ${SOCKET_PROXY_EXEC}
+      POST: ${SOCKET_PROXY_POST}
+      INFO: ${SOCKET_PROXY_INFO}       # CPU, RAM, info sistema
+      PING: ${SOCKET_PROXY_PING}       # health check
+      VERSION: ${SOCKET_PROXY_VERSION} # versione Docker
+    networks:
+      - portainer-net
+
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    labels:
+      - "diun.enable=true"
+    restart: always
+    ports:
+      - "${PORTAINER_PORT_HTTP}:8000"
+      - "${PORTAINER_PORT_HTTPS}:9443"
+    volumes:
+      - ${PORTAINER_DATA}:/data
+    command: -H tcp://socket-proxy-portainer:2375 --tlsskipverify
+    depends_on:
+      - socket-proxy-portainer
+    networks:
+      - portainer-net
+
+networks:
+  portainer-net:
+    driver: bridge

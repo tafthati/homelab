@@ -1,0 +1,32 @@
+services:
+  socket-proxy-kuma:
+    image: tecnativa/docker-socket-proxy:latest
+    container_name: socket-proxy-kuma
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      CONTAINERS: ${SOCKET_PROXY_CONTAINERS}
+      POST: ${SOCKET_PROXY_POST}
+      INFO: ${SOCKET_PROXY_INFO}
+    networks:
+      - kuma-net
+
+  uptime-kuma:
+    image: louislam/uptime-kuma:1
+    container_name: uptime-kuma
+    labels:
+      - "diun.enable=true"
+    restart: always
+    ports:
+      - "${KUMA_PORT}:3001"
+    volumes:
+      - ${KUMA_DATA}:/app/data
+    depends_on:
+      - socket-proxy-kuma
+    networks:
+      - kuma-net
+
+networks:
+  kuma-net:
+    driver: bridge

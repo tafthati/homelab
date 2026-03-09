@@ -63,15 +63,6 @@ di configurare alert.
 | `docker-compose.yml` | Definizione di tutti e 4 i container dello stack |
 | `.env.example` | Variabili d'ambiente necessarie (copiare in `.env`) |
 
----
-
-## Deploy
-
-```bash
-cp .env.example .env
-nano .env
-docker compose up -d
-```
 
 ---
 
@@ -82,3 +73,14 @@ docker compose up -d
 - I dati di Grafana e Prometheus sono persistiti in volumi Docker dedicati
 - Node Exporter e cAdvisor non espongono interfacce grafiche — sono
   sorgenti dati per Prometheus
+
+---
+
+## ⚠️ Note di sicurezza
+
+Il file `prometheus/prometheus.yml` non è incluso in questo repository
+perché contiene credenziali di autenticazione per gli endpoint di scraping.
+
+Per ripristinare la configurazione, crea manualmente il file
+`prometheus/prometheus.yml` seguendo il template commentato nel compose.
+
