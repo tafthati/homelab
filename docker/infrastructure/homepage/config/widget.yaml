@@ -1,0 +1,62 @@
+# ============================================
+#   HOMEPAGE — Widgets
+#   Docs: https://gethomepage.dev/configs/info-widgets/
+# ============================================
+
+- search:
+    provider: brave
+    focus: true
+    showSearchSuggestions: true
+    target: _blank
+
+- logo:
+    icon: https://simpleicons.org/icons/inquirer.svg
+
+- datetime:
+    text_size: sh
+    locale: it-IT
+    format:
+      dateStyle: medium
+      timeStyle: medium
+      hour12: false
+
+- resources:
+    label:
+    expanded: true
+    cpu: true
+    memory: true
+    disk: /
+    cputemp: true
+    uptime: true
+    units: metric
+    diskUnits: bbytes
+    network: true
+    refresh: 10000
+
+- resources:
+    label:
+    expanded: true
+    disk: /mnt/media_jelly
+    diskUnits: bbytes
+
+- openweathermap:
+    label: [Città]
+    # ⚠️  Coordinate città — modifica se necessario
+    latitude:
+    longitude:
+    units: metric
+    apiKey: {{HOMEPAGE_VAR_OPENWEATHERMAP_KEY}}
+    lang: it
+    cache: 5
+    format:
+      maximumFractionDigits: 1
+
+- stocks:
+    provider: finnhub
+    color: true
+    cache: 3
+    watchlist:
+      - BINANCE:BTCEUR
+      - AAPL
+      - TSLA
+      - BINANCE:ETHEUR

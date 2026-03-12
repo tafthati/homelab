@@ -1,0 +1,12 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/docker/
+
+localdocker:
+  host: socket-proxy
+  port: 2375
+
+ubuserver:
+  host: socket-proxy
+  port: 2375
+

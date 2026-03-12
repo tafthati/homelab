@@ -1,0 +1,155 @@
+# ============================================
+#   HOMEPAGE — Services
+#   Docs: https://gethomepage.dev/configs/services/
+# ============================================
+
+- Calendario:
+    - " ":
+        widget:
+          type: calendar
+          view: monthly
+          firstDayInWeek: monday
+          timezone: Europe/Rome
+          maxEvents: 15
+          showTime: true
+          previousDays: 0
+          integrations:
+            - type: ical
+              # ⚠️  URL calendario iCloud pubblicato — ottieni da: Calendario.app > Condividi > Copia link
+              url: https://your_icloud_calendar_url_here
+              name: Cose
+              color: blue
+              params:
+                showName: true
+            - type: ical
+              url: https://your_icloud_calendar_url_2_here
+              name: Cosette
+              color: orange
+              params:
+                showName: true
+
+- Media:
+     - Jellyfin:
+        icon: jellyfin.png
+        href: http://192.XXX.X.XX:8096
+        siteMonitor: http://192.XXX.X.XX:8096
+        widget:
+          type: jellyfin
+          url: http://192.XXX.X.XX:8096
+          key: {{HOMEPAGE_VAR_JELLYFIN_API}}
+          enableBlocks: true
+          enableNowPlaying: true
+          enableUser: false
+          showEpisodeNumber: true
+          expandOneSreamToTwoRows: true
+          enableMediaControl: true
+          fields: ["movies", "series", "episodes", "songs"]
+
+- Monitoring:
+  - Uptime Kuma:
+      icon: uptime-kuma.svg
+      href: "{{HOMEPAGE_VAR_KUMA_URL}}"
+      siteMonitor: "{{HOMEPAGE_VAR_KUMA_URL}}"
+      widget:
+        type: uptimekuma
+        url: "{{HOMEPAGE_VAR_KUMA_URL}}"
+        slug: "{{HOMEPAGE_VAR_KUMA_SLUG}}"
+        fields: ["up", "down", "uptime"]
+  - Containers:
+      icon: docker.svg
+      href: #
+      server: localdocker
+      container: homepage
+      widget:
+        type: docker
+  - Grafana:
+      icon: grafana.svg
+      href: http://192.XXX.X.XX:3000
+      siteMonitor: http://192.XXX.X.XX:3000
+      widget:
+        type: grafana
+        version: 2
+        url: http://192.XXX.X.XX:3000
+        username: {{HOMEPAGE_VAR_GRAFANA_USER}}
+        password: {{HOMEPAGE_VAR_GRAFANA_PASS}}
+        fields:
+          - dashboards
+          - datasources
+          - totalalerts
+          - alertstriggered
+  - Prometheus:
+     icon: prometheus.svg
+     siteMonitor: http://192.XXX.X.XX:9090
+     href: http://192.XXX.X.XX:9090
+     widget:
+       type: prometheus
+       url: http://192.XXX.X.XX:9090
+
+- Network & Security:
+    - Pi-hole:
+        id: col-12-21__pihole
+        icon: pi-hole
+        href: http://192.XXX.XX.XX:8080/admin
+        server: ubuserver
+        container: pihole
+        widget:
+          type: pihole
+          url: "{{HOMEPAGE_VAR_PIHOLE_URL}}"
+          version: 6
+          key: "{{HOMEPAGE_VAR_PIHOLE_PASS}}"
+          fields: ["queries", "blocked", "blocked_percent", "gravity"]
+    - Wireguard:
+        icon: wireguard.svg
+        href: #
+        ping: 10.X.X.X
+
+- Infrastructure:
+    - TIM:
+        icon: router.svg
+        href: http://192.XXX.X.XX
+        siteMonitor: http://192.XXX.X.XX
+    - CloudFlare:
+        icon: cloudflare.svg
+        href: https://dash.cloudflare.com/login
+    - Oracle Cloud:
+        icon: oracle-cloud.svg
+        href: https://cloud.oracle.com
+
+- Management:
+    - Webmin:
+        icon: webmin.svg
+        href: https://192.XXX.X.XX:10000
+        siteMonitor: https://192.XXX.X.XX:10000
+    - Portainer:
+        id: portainer-widget__portainer
+        icon: portainer
+        href: "{{HOMEPAGE_VAR_PORTAINER_URL}}"
+        server: ubuserver
+        container: portainer
+        widget:
+          type: portainer
+          url: {{HOMEPAGE_VAR_PORTAINER_IP_URL}}
+          env: {{HOMEPAGE_VAR_PORTAINER_ENV}}
+          key: {{HOMEPAGE_VAR_PORTAINER_API_KEY}}
+    - Filebrowser:
+        icon: filebrowser.svg
+        href: "{{HOMEPAGE_VAR_FILEBROWSER_URL}}"
+        siteMonitor: "{{HOMEPAGE_VAR_FILEBROWSER_URL}}"
+        widget:
+          type: filebrowser
+          url: "{{HOMEPAGE_VAR_FILEBROWSER_URL}}"
+          username: "{{HOMEPAGE_VAR_FILEBROWSER_USER}}"
+          password: "{{HOMEPAGE_VAR_FILEBROWSER_PASS}}"
+          fields: ["used", "total", "available"]
+
+- Live Dashboards:
+    - Metric Exporter:
+        href: http://192.XXX.X.XX:3000/d/pMEd7m0Mz/cadvisor-exporter
+        siteMonitor: http://192.XXX.X.XX:3000
+        widget:
+          type: iframe
+          src: http://192.XXX.X.XX:3000/d/pMEd7m0Mz/cadvisor-exporter?orgId=1&theme=dark&kiosk
+          classes: h-64 sm:h-72 md:h-80 lg:h-96 xl:h-screen w-full
+          lazyload: false
+          allowFullscreen: true
+

@@ -1,0 +1,4 @@
+providers:
+  openweathermap: "{{HOMEPAGE_VAR_OPENWEATHERMAP_KEY}}"
+  # ⚠️  Genera su https://finnhub.io — aggiungi HOMEPAGE_VAR_FINNHUB_KEY al .env
+  finnhub: your_finnhub_api_key_here

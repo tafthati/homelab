@@ -37,14 +37,11 @@ profile/
 backups/
 backup/
 cache/
-config/
 
 # ============================================================
 #  📸 MEDIA & FILE PESANTI (file-shaming)
 # ============================================================
 *.jpg
-*.jpeg
-*.png
 *.gif
 *.mp4
 *.mkv

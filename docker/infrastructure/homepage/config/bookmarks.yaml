@@ -1,0 +1,32 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/bookmarks
+
+- Infrastructure:
+    - OracleCloud:
+        - abbr: OCI
+          href: https://idcs-3ca4fe256d8048dc98af91f55729112a.identity.oraclecloud.com/ui/v1/signin
+    - CloudFlare:
+        - abbr: CF
+          href: https://dash.cloudflare.com/login
+
+- Social:
+    - Reddit:
+        - icon: reddit.png
+          href: https://reddit.com/
+
+- I.A.:
+    - ChatGPT:
+        - icon: chatgpt.png
+          href: https://chatgpt.com
+    - Perplexity:
+        - icon: perplexity.png
+          href: https://www.perplexity.ai
+
+- Entertainment:
+    - YouTube:
+        - icon: youtube.png
+          href: https://youtube.com/
+    - Twitch:
+        - icon: twitch.png
+          href: https://www.twitch.tv/
